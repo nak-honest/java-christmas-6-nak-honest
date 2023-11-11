@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DaysOfWeekDiscount implements Discount {
+    private static final int DISCOUNT_AMOUNT_PER_MENU = 2_023;
     private static final List<DayOfWeek> WEEKDAYS =
             List.of(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
-    private static final int DISCOUNT_AMOUNT_PER_MENU = 2_023;
+    private static final List<DayOfWeek> WEEKENDS =
+            List.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
 
     private final List<DayOfWeek> discountDaysOfWeek;
     private final int discountAmountPerMenu;
@@ -25,6 +27,10 @@ public class DaysOfWeekDiscount implements Discount {
 
     public static DaysOfWeekDiscount weekdaysDiscount() {
         return new DaysOfWeekDiscount(WEEKDAYS, DISCOUNT_AMOUNT_PER_MENU, MenuType.DESSERT);
+    }
+
+    public static DaysOfWeekDiscount weekendsDiscount() {
+        return new DaysOfWeekDiscount(WEEKENDS, DISCOUNT_AMOUNT_PER_MENU, MenuType.MAIN);
     }
 
     @Override
