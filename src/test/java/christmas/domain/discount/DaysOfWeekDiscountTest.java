@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WeekdaysDiscountTest {
+public class DaysOfWeekDiscountTest {
     static final List<DayOfWeek> WEEKDAYS =
             List.of(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
 
@@ -33,10 +33,10 @@ public class WeekdaysDiscountTest {
 
     @ParameterizedTest
     @MethodSource("provideWeekdays")
-    void 방문_날짜가_일요일에서_목요일_사이라면_할인을_적용한다(LocalDate visitDate) {
+    void 방문_날짜가_일요일에서_목요일_사이라면_평일_할인을_적용한다(LocalDate visitDate) {
         // given
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(DessertMenu.CHOCOLATE_CAKE, 1)));
-        WeekdaysDiscount weekdaysDiscount = new WeekdaysDiscount();
+        DaysOfWeekDiscount weekdaysDiscount = DaysOfWeekDiscount.weekdaysDiscount();
 
         // when
         Money actualDiscountAmount = weekdaysDiscount.calculateDiscountAmount(reservation);
@@ -55,10 +55,10 @@ public class WeekdaysDiscountTest {
 
     @ParameterizedTest
     @MethodSource("provideWeekends")
-    void 방문_날짜가_일요일에서_목요일_사이가_아니라면_할인을_적용하지_않는다(LocalDate visitDate) {
+    void 방문_날짜가_일요일에서_목요일_사이가_아니라면_평일_할인을_적용하지_않는다(LocalDate visitDate) {
         // given
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(DessertMenu.CHOCOLATE_CAKE, 1)));
-        WeekdaysDiscount weekdaysDiscount = new WeekdaysDiscount();
+        DaysOfWeekDiscount weekdaysDiscount = DaysOfWeekDiscount.weekdaysDiscount();
 
         // when
         Money actualDiscountAmount = weekdaysDiscount.calculateDiscountAmount(reservation);
@@ -84,10 +84,10 @@ public class WeekdaysDiscountTest {
 
     @ParameterizedTest
     @MethodSource("provideOrderMenus")
-    void 할인이_적용_되는_경우_디저트_메뉴의_수량에_따라_할인을_적용한다(OrderMenus orderMenus, Money expectedDiscountAmount) {
+    void 평일_할인이_적용_되는_경우_디저트_메뉴의_수량에_따라_할인을_적용한다(OrderMenus orderMenus, Money expectedDiscountAmount) {
         // given
         Reservation reservation = new Reservation(LocalDate.of(2023, Month.DECEMBER, 4), orderMenus);
-        WeekdaysDiscount weekdaysDiscount = new WeekdaysDiscount();
+        DaysOfWeekDiscount weekdaysDiscount = DaysOfWeekDiscount.weekdaysDiscount();
 
         // when
         Money actualDiscountAmount = weekdaysDiscount.calculateDiscountAmount(reservation);
