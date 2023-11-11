@@ -27,11 +27,11 @@ public class ChristmasDDayDiscountTest {
         ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount();
 
         // when
-        Money discountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
+        Money actualDiscountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
 
         // then
         Money expectedDiscountAmount = new Money(1_000 + (day - 1) * 100);
-        assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
     static IntStream provideDaysWithoutDiscount() {
@@ -47,10 +47,10 @@ public class ChristmasDDayDiscountTest {
         ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount();
 
         // when
-        Money discountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
+        Money actualDiscountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
 
         // then
         Money expectedDiscountAmount = new Money(0);
-        assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 }
