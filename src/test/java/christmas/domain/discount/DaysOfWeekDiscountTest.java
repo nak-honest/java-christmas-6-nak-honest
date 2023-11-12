@@ -51,7 +51,7 @@ public class DaysOfWeekDiscountTest {
         Money actualDiscountAmount = WEEKDAYS_DISCOUNT.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(2_023);
+        Money expectedDiscountAmount = Money.of(2_023);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
@@ -65,7 +65,7 @@ public class DaysOfWeekDiscountTest {
         Money actualDiscountAmount = WEEKDAYS_DISCOUNT.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(0);
+        Money expectedDiscountAmount = Money.of(0);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
@@ -73,13 +73,13 @@ public class DaysOfWeekDiscountTest {
         return Stream.of(
                 Arguments.of(
                         new OrderMenus(Map.of(BeverageMenu.RED_WINE, 1)),
-                        new Money(0)),
+                        Money.of(0)),
                 Arguments.of(
                         new OrderMenus(Map.of(DessertMenu.CHOCOLATE_CAKE, 2, MainMenu.T_BONE_STEAK, 5)),
-                        new Money(4_046)),
+                        Money.of(4_046)),
                 Arguments.of(
                         new OrderMenus(Map.of(DessertMenu.CHOCOLATE_CAKE, 2, DessertMenu.ICE_CREAM, 1)),
-                        new Money(6_069))
+                        Money.of(6_069))
         );
     }
 
@@ -106,7 +106,7 @@ public class DaysOfWeekDiscountTest {
         Money actualDiscountAmount = WEEKENDS_DISCOUNT.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(0);
+        Money expectedDiscountAmount = Money.of(0);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
@@ -120,7 +120,7 @@ public class DaysOfWeekDiscountTest {
         Money actualDiscountAmount = WEEKENDS_DISCOUNT.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(2_023);
+        Money expectedDiscountAmount = Money.of(2_023);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
@@ -128,13 +128,13 @@ public class DaysOfWeekDiscountTest {
         return Stream.of(
                 Arguments.of(
                         new OrderMenus(Map.of(BeverageMenu.RED_WINE, 1)),
-                        new Money(0)),
+                        Money.of(0)),
                 Arguments.of(
                         new OrderMenus(Map.of(MainMenu.T_BONE_STEAK, 2, DessertMenu.ICE_CREAM, 5)),
-                        new Money(4_046)),
+                        Money.of(4_046)),
                 Arguments.of(
                         new OrderMenus(Map.of(MainMenu.T_BONE_STEAK, 2, MainMenu.BARBECUE_RIB, 1)),
-                        new Money(6_069))
+                        Money.of(6_069))
         );
     }
 

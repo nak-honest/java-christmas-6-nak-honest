@@ -9,8 +9,8 @@ import java.time.Month;
 public class ChristmasDDayDiscount implements Discount {
     private static final LocalDate START_DATE = LocalDate.of(2023, Month.DECEMBER, 1);
     private static final LocalDate END_DATE = LocalDate.of(2023, Month.DECEMBER, 25);
-    private static final int BASE_DISCOUNT_AMOUNT = 1_000;
-    private static final int DISCOUNT_AMOUNT_PER_DAY = 100;
+    private static final Money BASE_DISCOUNT_AMOUNT = Money.of(1_000);
+    private static final Money DISCOUNT_AMOUNT_PER_DAY = Money.of(100);
 
     @Override
     public Money calculateDiscountAmount(Reservation reservation) {
@@ -22,9 +22,8 @@ public class ChristmasDDayDiscount implements Discount {
     }
 
     private Money calculateDiscountAmountByDay(Reservation reservation) {
-        int visitDay = reservation.getVisitDay();
-        int dayDiff = visitDay - START_DATE.getDayOfMonth();
+        int dayDiff = reservation.daysFrom(START_DATE);
 
-        return new Money(BASE_DISCOUNT_AMOUNT + dayDiff * DISCOUNT_AMOUNT_PER_DAY);
+        return BASE_DISCOUNT_AMOUNT.add(DISCOUNT_AMOUNT_PER_DAY.multiply(dayDiff));
     }
 }

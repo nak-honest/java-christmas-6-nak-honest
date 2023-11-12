@@ -6,21 +6,23 @@ import christmas.domain.menu.MenuType;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DaysOfWeekDiscount implements Discount {
-    private static final int DISCOUNT_AMOUNT_PER_MENU = 2_023;
-    private static final List<DayOfWeek> WEEKDAYS =
-            List.of(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
-    private static final List<DayOfWeek> WEEKENDS =
-            List.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
+    private static final Money DISCOUNT_AMOUNT_PER_MENU = Money.of(2_023);
+    private static final Set<DayOfWeek> WEEKDAYS =
+            Set.of(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
+    private static final Set<DayOfWeek> WEEKENDS =
+            Set.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
 
-    private final List<DayOfWeek> discountDaysOfWeek;
-    private final int discountAmountPerMenu;
+    private final Set<DayOfWeek> discountDaysOfWeek;
+    private final Money discountAmountPerMenu;
     private final MenuType discountMenuType;
 
-    public DaysOfWeekDiscount(List<DayOfWeek> discountDaysOfWeek, int discountAmountPerMenu, MenuType discountMenuType) {
-        this.discountDaysOfWeek = new ArrayList<>(discountDaysOfWeek);
+    public DaysOfWeekDiscount(Set<DayOfWeek> discountDaysOfWeek, Money discountAmountPerMenu, MenuType discountMenuType) {
+        this.discountDaysOfWeek = new HashSet<>(discountDaysOfWeek);
         this.discountAmountPerMenu = discountAmountPerMenu;
         this.discountMenuType = discountMenuType;
     }
@@ -43,12 +45,11 @@ public class DaysOfWeekDiscount implements Discount {
     }
 
     private boolean isDiscountDayOfWeek(Reservation reservation) {
-        return discountDaysOfWeek.stream()
-                .anyMatch(reservation::isDayOfWeek);
+        return reservation.isDayOfWeekIn(discountDaysOfWeek);
     }
 
     private Money calculateDiscountAmountByMenu(Reservation reservation) {
         int discountMenuCount = reservation.countMenuByType(discountMenuType);
-        return new Money(discountMenuCount * discountAmountPerMenu);
+        return discountAmountPerMenu.multiply(discountMenuCount);
     }
 }

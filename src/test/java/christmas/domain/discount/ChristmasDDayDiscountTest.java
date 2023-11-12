@@ -30,7 +30,7 @@ public class ChristmasDDayDiscountTest {
         Money actualDiscountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(1_000 + (day - 1) * 100);
+        Money expectedDiscountAmount = Money.of(1_000 + (day - 1) * 100);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 
@@ -50,7 +50,7 @@ public class ChristmasDDayDiscountTest {
         Money actualDiscountAmount = christmasDDayDiscount.calculateDiscountAmount(reservation);
 
         // then
-        Money expectedDiscountAmount = new Money(0);
+        Money expectedDiscountAmount = Money.of(0);
         assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
     }
 }
