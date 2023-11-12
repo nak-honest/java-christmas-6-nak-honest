@@ -37,15 +37,11 @@ public class DaysOfWeekDiscount implements Discount {
 
     @Override
     public Money calculateDiscountAmount(Reservation reservation) {
-        if (!isDiscountDayOfWeek(reservation)) {
+        if (!reservation.isDayOfWeekIn(discountDaysOfWeek)) {
             return Money.zeroInstance();
         }
 
         return calculateDiscountAmountByMenu(reservation);
-    }
-
-    private boolean isDiscountDayOfWeek(Reservation reservation) {
-        return reservation.isDayOfWeekIn(discountDaysOfWeek);
     }
 
     private Money calculateDiscountAmountByMenu(Reservation reservation) {
