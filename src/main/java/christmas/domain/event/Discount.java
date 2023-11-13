@@ -6,12 +6,12 @@ import christmas.domain.event.rule.EventRule;
 import christmas.domain.event.strategy.DiscountStrategy;
 
 public class Discount {
-    private final String name;
+    private final DiscountType discountType;
     private final DiscountStrategy discountStrategy;
     private final EventRule discountRule;
 
-    public Discount(String name, DiscountStrategy discountStrategy, EventRule discountRule) {
-        this.name = name;
+    public Discount(DiscountType discountType, DiscountStrategy discountStrategy, EventRule discountRule) {
+        this.discountType = discountType;
         this.discountStrategy = discountStrategy;
         this.discountRule = discountRule;
     }
