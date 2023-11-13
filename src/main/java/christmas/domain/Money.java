@@ -2,7 +2,7 @@ package christmas.domain;
 
 import java.util.Objects;
 
-public class Money {
+public class Money implements Comparable<Money> {
     private static final Money ZERO_AMOUNT = new Money(0);
 
     private final int amount;
@@ -56,5 +56,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public int compareTo(Money money) {
+        return Integer.compare(this.amount, money.amount);
     }
 }
