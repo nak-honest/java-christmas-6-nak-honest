@@ -3,59 +3,63 @@ package christmas.domain.discount;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
+import christmas.domain.discount.factory.SpecialDiscountFactory;
 import christmas.domain.menu.MainMenu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SpecialDiscountTest {
-    static List<Integer> provideDaysWithStar() {
-        return List.of(3, 10, 17, 24, 25, 31);
+    static final Set<LocalDate> DATES_WITH_STAR = IntStream.rangeClosed(1, 31)
+            .mapToObj(day -> LocalDate.of(2023, Month.DECEMBER, day))
+            .filter(date -> date.getDayOfWeek().equals(DayOfWeek.SUNDAY) || date.getDayOfMonth() == 25)
+            .collect(Collectors.toSet());
+
+    static Set<LocalDate> provideDatesWithStar() {
+        return DATES_WITH_STAR;
     }
 
     @ParameterizedTest
-    @MethodSource("provideDaysWithStar")
-    void 방문_날짜가_별이_있는_날짜라면_특별_할인을_적용한다(int visitDay) {
+    @MethodSource("provideDatesWithStar")
+    void 방문_날짜가_별이_있는_날짜라면_1_000원을_할인한다(LocalDate visitDate) {
         // given
-        LocalDate visitDate = LocalDate.of(2023, Month.DECEMBER, visitDay);
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.T_BONE_STEAK, 1)));
-        SpecialDiscount specialDiscount = new SpecialDiscount();
+        Discount specialDiscount = SpecialDiscountFactory.create();
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
 
         // when
-        Money actualDiscountAmount = specialDiscount.calculateDiscountAmount(reservation);
+        Money discountAmount = specialDiscount.discount(reservation);
 
         // then
-        Money expectedDiscountAmount = Money.of(1_000);
-        assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
+        assertThat(discountAmount).isEqualTo(Money.of(1_000));
     }
 
-    static List<Integer> provideDaysWithoutStar() {
+    static Set<LocalDate> provideDatesWithoutStar() {
         return IntStream.rangeClosed(1, 31)
-                .filter(day -> !provideDaysWithStar().contains(day))
-                .boxed()
-                .toList();
+                .mapToObj(day -> LocalDate.of(2023, Month.DECEMBER, day))
+                .filter(date -> !DATES_WITH_STAR.contains(date))
+                .collect(Collectors.toSet());
     }
 
     @ParameterizedTest
-    @MethodSource("provideDaysWithoutStar")
-    void 방문_날짜가_별이_없는_날짜라면_특별_할인을_적용하지_않는다(int visitDay) {
+    @MethodSource("provideDatesWithoutStar")
+    void 방문_날짜가_별이_없는_날짜라면_할인을_적용하지_않는다(LocalDate visitDate) {
         // given
-        LocalDate visitDate = LocalDate.of(2023, Month.DECEMBER, visitDay);
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.T_BONE_STEAK, 1)));
-        SpecialDiscount specialDiscount = new SpecialDiscount();
+        Discount specialDiscount = SpecialDiscountFactory.create();
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
 
         // when
-        Money actualDiscountAmount = specialDiscount.calculateDiscountAmount(reservation);
+        Money discountAmount = specialDiscount.discount(reservation);
 
         // then
-        Money expectedDiscountAmount = Money.of(0);
-        assertThat(actualDiscountAmount).isEqualTo(expectedDiscountAmount);
+        assertThat(discountAmount).isEqualTo(Money.of(0));
     }
 }
