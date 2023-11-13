@@ -1,11 +1,11 @@
-package christmas.domain.discount.factory;
+package christmas.domain.event.factory;
 
 import christmas.domain.Money;
-import christmas.domain.discount.Discount;
-import christmas.domain.discount.rule.DaysOfWeekDiscountRule;
-import christmas.domain.discount.rule.DiscountRule;
-import christmas.domain.discount.strategy.DiscountStrategy;
-import christmas.domain.discount.strategy.MenuTypeDiscountStrategy;
+import christmas.domain.event.Discount;
+import christmas.domain.event.rule.DaysOfWeekEventRule;
+import christmas.domain.event.rule.EventRule;
+import christmas.domain.event.strategy.DiscountStrategy;
+import christmas.domain.event.strategy.MenuTypeDiscountStrategy;
 import christmas.domain.menu.MenuType;
 
 import java.time.DayOfWeek;
@@ -22,14 +22,14 @@ public class DaysOfWeekDiscountFactory {
 
     public static Discount createWeekdaysDiscount() {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.DESSERT, DISCOUNT_AMOUNT_PER_MENU);
-        DiscountRule discountRule = new DaysOfWeekDiscountRule(WEEKDAYS);
+        EventRule discountRule = new DaysOfWeekEventRule(WEEKDAYS);
 
         return new Discount("평일 할인", discountStrategy, discountRule);
     }
 
     public static Discount createWeekendsDiscount() {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.MAIN, DISCOUNT_AMOUNT_PER_MENU);
-        DiscountRule discountRule = new DaysOfWeekDiscountRule(WEEKENDS);
+        EventRule discountRule = new DaysOfWeekEventRule(WEEKENDS);
 
         return new Discount("주말 할인", discountStrategy, discountRule);
     }

@@ -1,4 +1,4 @@
-package christmas.domain.discount.strategy;
+package christmas.domain.event.strategy;
 
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;

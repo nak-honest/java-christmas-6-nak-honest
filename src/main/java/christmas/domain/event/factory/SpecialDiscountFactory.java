@@ -1,11 +1,11 @@
-package christmas.domain.discount.factory;
+package christmas.domain.event.factory;
 
 import christmas.domain.Money;
-import christmas.domain.discount.Discount;
-import christmas.domain.discount.rule.DaysDiscountRule;
-import christmas.domain.discount.rule.DiscountRule;
-import christmas.domain.discount.strategy.DailyAccumulateDiscountStrategy;
-import christmas.domain.discount.strategy.DiscountStrategy;
+import christmas.domain.event.Discount;
+import christmas.domain.event.rule.DaysEventRule;
+import christmas.domain.event.rule.EventRule;
+import christmas.domain.event.strategy.DailyAccumulateDiscountStrategy;
+import christmas.domain.event.strategy.DiscountStrategy;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class SpecialDiscountFactory {
 
     public static Discount create() {
         DiscountStrategy discountStrategy = DailyAccumulateDiscountStrategy.fixed(DISCOUNT_AMOUNT);
-        DiscountRule discountRule = new DaysDiscountRule(DISCOUNT_DAYS);
+        EventRule discountRule = new DaysEventRule(DISCOUNT_DAYS);
 
         return new Discount(NAME, discountStrategy, discountRule);
     }

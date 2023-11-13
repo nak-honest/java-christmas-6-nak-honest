@@ -1,7 +1,7 @@
-package christmas.domain.discount.rule;
+package christmas.domain.event.rule;
 
 import christmas.domain.Reservation;
 
-public interface DiscountRule {
+public interface EventRule {
     boolean isSatisfiedBy(Reservation reservation);
 }

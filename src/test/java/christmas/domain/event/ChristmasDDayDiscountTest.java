@@ -1,8 +1,9 @@
-package christmas.domain.discount;
+package christmas.domain.event;
 
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
+import christmas.domain.event.factory.ChristmasDDayDiscountFactory;
 import christmas.domain.menu.MainMenu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,7 +25,7 @@ public class ChristmasDDayDiscountTest {
     void 방문_날짜가_1일에서_25일_사이라면_크리스마스_디_데이_할인을_적용한다(int visitDay) {
         // given
         LocalDate visitDate = LocalDate.of(2023, Month.DECEMBER, visitDay);
-        Discount christmasDDayDiscount = christmas.domain.discount.factory.ChristmasDDayDiscountFactory.create();
+        Discount christmasDDayDiscount = ChristmasDDayDiscountFactory.create();
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
 
         // when
@@ -43,7 +44,7 @@ public class ChristmasDDayDiscountTest {
     void 방문_날짜가_26일에서_31일_사이라면_크리스마스_디_데이_할인을_적용하지_않는다(int visitDay) {
         // given
         LocalDate visitDate = LocalDate.of(2023, Month.DECEMBER, visitDay);
-        Discount christmasDDayDiscount = christmas.domain.discount.factory.ChristmasDDayDiscountFactory.create();
+        Discount christmasDDayDiscount = ChristmasDDayDiscountFactory.create();
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
 
         // when

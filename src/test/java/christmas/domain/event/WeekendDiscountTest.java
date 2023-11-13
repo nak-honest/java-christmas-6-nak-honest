@@ -1,9 +1,9 @@
-package christmas.domain.discount;
+package christmas.domain.event;
 
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.factory.DaysOfWeekDiscountFactory;
+import christmas.domain.event.factory.DaysOfWeekDiscountFactory;
 import christmas.domain.menu.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
