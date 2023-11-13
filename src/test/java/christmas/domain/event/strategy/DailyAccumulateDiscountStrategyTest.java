@@ -3,7 +3,7 @@ package christmas.domain.event.strategy;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.menu.MainMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,7 +36,7 @@ public class DailyAccumulateDiscountStrategyTest {
     @MethodSource("provideDaysAndVariableDiscountAmount")
     void 방문_날짜에_따른_일일_누적_할인_금액을_계산한다(LocalDate visitDate, int expectedDiscountAmount) {
         // given
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         DailyAccumulateDiscountStrategy dailyAccumulateDiscountStrategy =
@@ -61,7 +61,7 @@ public class DailyAccumulateDiscountStrategyTest {
     @MethodSource("provideDaysAndFixedDiscountAmount")
     void 방문_날짜와_상관없이_고정된_할인_금액을_계산한다(LocalDate visitDate, int expectedDiscountAmount) {
         // given
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         DailyAccumulateDiscountStrategy dailyAccumulateDiscountStrategy =

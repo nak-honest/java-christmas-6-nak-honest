@@ -37,6 +37,10 @@ public class Money {
         return Money.of(this.amount + money.amount);
     }
 
+    public boolean isGreaterThanOrEqual(Money money) {
+        return this.amount >= money.amount;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {

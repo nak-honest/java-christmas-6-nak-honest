@@ -14,8 +14,25 @@ public class OrderMenus {
 
     public int countMenuByType(MenuType menuType) {
         return orderMenus.keySet().stream()
-                .filter(menuType::hasMenu)
+                .filter(menu -> menu.isTypeOf(menuType))
                 .mapToInt(orderMenus::get)
                 .sum();
+    }
+
+    public boolean isTotalPriceAtLeast(Money amount) {
+        return getTotalPrice().isGreaterThanOrEqual(amount);
+    }
+
+    private Money getTotalPrice() {
+        return orderMenus.entrySet().stream()
+                .map(this::getPrice)
+                .reduce(Money.zeroInstance(), Money::add);
+    }
+
+    private Money getPrice(Map.Entry<Menu, Integer> entry) {
+        Menu menu = entry.getKey();
+        int count = entry.getValue();
+
+        return menu.getPrice().multiply(count);
     }
 }

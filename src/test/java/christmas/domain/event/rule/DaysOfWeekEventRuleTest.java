@@ -2,7 +2,7 @@ package christmas.domain.event.rule;
 
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.menu.MainMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -34,7 +34,7 @@ public class DaysOfWeekEventRuleTest {
     @MethodSource("provideEventDates")
     void 방문_날짜가_이벤트_요일에_해당하는_경우_이벤트를_적용한다(LocalDate visitDate) {
         // given
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         boolean isEvent = daysOfWeekEventRule.isSatisfiedBy(reservation);
@@ -54,7 +54,7 @@ public class DaysOfWeekEventRuleTest {
     @MethodSource("provideNoEventDates")
     void 방문_날짜가_이벤트_요일에_해당하지_않는_경우_이벤트를_적용하지_않는다(LocalDate visitDate) {
         // given
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         boolean isEvent = daysOfWeekEventRule.isSatisfiedBy(reservation);

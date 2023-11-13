@@ -4,7 +4,7 @@ import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
 import christmas.domain.event.factory.SpecialDiscountFactory;
-import christmas.domain.menu.MainMenu;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -33,7 +33,7 @@ public class SpecialDiscountTest {
     void 방문_날짜가_별이_있는_날짜라면_1_000원을_할인한다(LocalDate visitDate) {
         // given
         Discount specialDiscount = SpecialDiscountFactory.create();
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         Money discountAmount = specialDiscount.discount(reservation);
@@ -54,7 +54,7 @@ public class SpecialDiscountTest {
     void 방문_날짜가_별이_없는_날짜라면_할인을_적용하지_않는다(LocalDate visitDate) {
         // given
         Discount specialDiscount = SpecialDiscountFactory.create();
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(MainMenu.BARBECUE_RIB, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
         Money discountAmount = specialDiscount.discount(reservation);

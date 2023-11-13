@@ -21,13 +21,13 @@ public class WeekdaysDiscountTest {
 
     static Stream<Arguments> provideMenusAndDiscountAmount() {
         return Stream.of(
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 1), 2_023),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 1, DessertMenu.CHOCOLATE_CAKE, 1), 4_046),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 3), 6_069),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 2, AppetizerMenu.TAPAS, 1), 4_046),
-                Arguments.of(Map.of(MainMenu.BARBECUE_RIB, 3), 0),
-                Arguments.of(Map.of(BeverageMenu.RED_WINE, 3), 0),
-                Arguments.of(Map.of(AppetizerMenu.CAESAR_SALAD, 3), 0)
+                Arguments.of(Map.of(Menu.ICE_CREAM, 1), 2_023),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 1, Menu.CHOCOLATE_CAKE, 1), 4_046),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 3), 6_069),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 2, Menu.TAPAS, 1), 4_046),
+                Arguments.of(Map.of(Menu.BARBECUE_RIB, 3), 0),
+                Arguments.of(Map.of(Menu.RED_WINE, 3), 0),
+                Arguments.of(Map.of(Menu.CAESAR_SALAD, 3), 0)
         );
     }
 
@@ -47,13 +47,13 @@ public class WeekdaysDiscountTest {
 
     static Stream<Arguments> provideMenus() {
         return Stream.of(
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 1)),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 1, DessertMenu.CHOCOLATE_CAKE, 1)),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 3)),
-                Arguments.of(Map.of(DessertMenu.ICE_CREAM, 2, AppetizerMenu.TAPAS, 1)),
-                Arguments.of(Map.of(MainMenu.BARBECUE_RIB, 3)),
-                Arguments.of(Map.of(BeverageMenu.RED_WINE, 3)),
-                Arguments.of(Map.of(AppetizerMenu.CAESAR_SALAD, 3))
+                Arguments.of(Map.of(Menu.ICE_CREAM, 1)),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 1, Menu.CHOCOLATE_CAKE, 1)),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 3)),
+                Arguments.of(Map.of(Menu.ICE_CREAM, 2, Menu.TAPAS, 1)),
+                Arguments.of(Map.of(Menu.BARBECUE_RIB, 3)),
+                Arguments.of(Map.of(Menu.RED_WINE, 3)),
+                Arguments.of(Map.of(Menu.CAESAR_SALAD, 3))
         );
     }
 
