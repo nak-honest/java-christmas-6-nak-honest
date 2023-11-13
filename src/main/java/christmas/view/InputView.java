@@ -17,7 +17,10 @@ public class InputView {
 
     public int readVisitDay() {
         writer.writeLine(DAY_INPUT_MESSAGE);
-
-        return Integer.parseInt(reader.get());
+        try {
+            return Integer.parseInt(reader.get());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_DAY_ERROR.format());
+        }
     }
 }
