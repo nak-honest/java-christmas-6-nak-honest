@@ -1,6 +1,9 @@
 package christmas.domain.menu;
 
+import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 import christmas.domain.Money;
+
+import java.util.Arrays;
 
 public enum Menu {
     BUTTON_MUSHROOM_SOUP("양송이수프", MenuType.APPETIZER, 6_000),
@@ -24,6 +27,13 @@ public enum Menu {
         this.name = name;
         this.menuType = menuType;
         this.price = Money.of(price);
+    }
+
+    public static Menu of(String name) {
+        return Arrays.stream(values())
+                .filter(menu -> menu.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_MENU_ERROR.format()));
     }
 
     public boolean isTypeOf(MenuType menuType) {

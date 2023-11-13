@@ -1,0 +1,17 @@
+package christmas;
+
+public enum ErrorMessage {
+    INVALID_MENU_ERROR("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+
+    public static final String HEADER = "[ERROR]";
+
+    private final String message;
+
+    ErrorMessage(String bodyMessage) {
+        this.message = String.format("%s %s", HEADER, bodyMessage);
+    }
+
+    public String format(Object ...args) {
+        return String.format(message, args);
+    }
+}
