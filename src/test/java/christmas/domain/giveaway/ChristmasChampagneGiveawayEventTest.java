@@ -38,10 +38,10 @@ public class ChristmasChampagneGiveawayEventTest {
         Reservation reservation = new Reservation(LocalDate.now(), new OrderMenus(menus));
 
         // when
-        Optional<Menu> menuGiveaway = christmasChampagneGiveawayEvent.getMenuGiveaway(reservation);
+        Menu menuGiveaway = christmasChampagneGiveawayEvent.getMenuGiveaway(reservation);
 
         // then
-        assertThat(menuGiveaway).contains(Menu.CHAMPAGNE);
+        assertThat(menuGiveaway).isEqualTo(Menu.CHAMPAGNE);
     }
 
     static Stream<Arguments> provideMenusLessThanMinimumPrice() {
@@ -63,9 +63,9 @@ public class ChristmasChampagneGiveawayEventTest {
         Reservation reservation = new Reservation(LocalDate.now(), new OrderMenus(menus));
 
         // when
-        Optional<Menu> menuGiveaway = christmasChampagneGiveawayEvent.getMenuGiveaway(reservation);
+        Menu menuGiveaway = christmasChampagneGiveawayEvent.getMenuGiveaway(reservation);
 
         // then
-        assertThat(menuGiveaway).isEmpty();
+        assertThat(menuGiveaway).isEqualTo(Menu.NONE);
     }
 }

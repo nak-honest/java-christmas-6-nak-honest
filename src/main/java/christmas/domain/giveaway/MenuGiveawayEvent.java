@@ -15,11 +15,11 @@ public class MenuGiveawayEvent {
         this.eventRule = eventRule;
     }
 
-    public Optional<Menu> getMenuGiveaway(Reservation reservation) {
+    public Menu getMenuGiveaway(Reservation reservation) {
         if (!eventRule.isSatisfiedBy(reservation)) {
-            return Optional.empty();
+            return Menu.NONE;
         }
 
-        return Optional.of(menuGiveaway);
+        return menuGiveaway;
     }
 }

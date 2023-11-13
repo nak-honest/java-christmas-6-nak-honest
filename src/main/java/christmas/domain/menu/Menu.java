@@ -6,6 +6,7 @@ import christmas.domain.Money;
 import java.util.Arrays;
 
 public enum Menu {
+    NONE("없음", MenuType.NONE, 0),
     BUTTON_MUSHROOM_SOUP("양송이수프", MenuType.APPETIZER, 6_000),
     TAPAS("타파스", MenuType.APPETIZER, 5_500),
     CAESAR_SALAD("시저샐러드", MenuType.APPETIZER, 8_000),

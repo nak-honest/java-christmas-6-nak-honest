@@ -19,10 +19,10 @@ public class MenuGiveawayEventTest {
         Reservation reservation = new Reservation(LocalDate.now(), new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
-        Optional<Menu> menuGiveaway = menuGiveawayEvent.getMenuGiveaway(reservation);
+        Menu menuGiveaway = menuGiveawayEvent.getMenuGiveaway(reservation);
 
         // then
-        assertThat(menuGiveaway).contains(Menu.CHAMPAGNE);
+        assertThat(menuGiveaway).isEqualTo(Menu.CHAMPAGNE);
     }
 
     @Test
@@ -32,9 +32,9 @@ public class MenuGiveawayEventTest {
         Reservation reservation = new Reservation(LocalDate.now(), new OrderMenus(Map.of(Menu.BARBECUE_RIB, 1)));
 
         // when
-        Optional<Menu> menuGiveaway = menuGiveawayEvent.getMenuGiveaway(reservation);
+        Menu menuGiveaway = menuGiveawayEvent.getMenuGiveaway(reservation);
 
         // then
-        assertThat(menuGiveaway).isEmpty();
+        assertThat(menuGiveaway).isEqualTo(Menu.NONE);
     }
 }
