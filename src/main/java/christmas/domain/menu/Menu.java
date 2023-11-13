@@ -17,7 +17,7 @@ public enum Menu {
     ICE_CREAM("아이스크림", MenuType.DESSERT, 5_000),
     ZERO_COKE("제로콜라", MenuType.BEVERAGE, 3_000),
     RED_WINE("레드와인", MenuType.BEVERAGE, 60_000),
-    SHAM_PAIN("샴페인", MenuType.BEVERAGE, 25_000);
+    CHAMPAGNE("샴페인", MenuType.BEVERAGE, 25_000);
 
     private final String name;
     private final MenuType menuType;
