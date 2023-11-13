@@ -14,9 +14,9 @@ public class DiscountResultTest {
     void 총_할인_금액을_구할_수_있다() {
         // given
         Map<DiscountType, Money> discountAmounts = Map.of(
-                DiscountType.SPECIAL, Money.of(40_000),
-                DiscountType.WEEKDAY, Money.of(10_000),
-                DiscountType.WEEKEND, Money.of(5_000)
+                DiscountType.SPECIAL, Money.of(1_000),
+                DiscountType.WEEKDAY, Money.of(20_230),
+                DiscountType.WEEKEND, Money.of(20_230)
         );
         DiscountResult discountResult = new DiscountResult(discountAmounts);
 
@@ -24,6 +24,6 @@ public class DiscountResultTest {
         Money totalDiscountAmount = discountResult.getTotalDiscountAmounts();
 
         // then
-        assertThat(totalDiscountAmount).isEqualTo(Money.of(55_000));
+        assertThat(totalDiscountAmount).isEqualTo(Money.of(41_460));
     }
 }
