@@ -1,5 +1,6 @@
 package christmas.domain.event.discount;
 
+import christmas.domain.DiscountResult;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
@@ -24,11 +25,11 @@ public class ChristmasPromotionDiscountsTest {
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.BARBECUE_RIB, 10)));
 
         // when
-        Money discountAmount = CHRISTMAS_PROMOTION_DISCOUNTS.discount(reservation).values().stream()
-                .reduce(Money.of(0), Money::add);
+        DiscountResult discountResult = CHRISTMAS_PROMOTION_DISCOUNTS.discount(reservation);
+        Money totalDiscountAmount = discountResult.getTotalDiscountAmounts();
 
         // then
-        assertThat(discountAmount).isNotEqualTo(Money.of(0));
+        assertThat(totalDiscountAmount).isNotEqualTo(Money.of(0));
     }
 
     @Test
@@ -38,10 +39,10 @@ public class ChristmasPromotionDiscountsTest {
         Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.ZERO_COKE, 1)));
 
         // when
-        Money discountAmount = CHRISTMAS_PROMOTION_DISCOUNTS.discount(reservation).values().stream()
-                .reduce(Money.of(0), Money::add);
+        DiscountResult discountResult = CHRISTMAS_PROMOTION_DISCOUNTS.discount(reservation);
+        Money totalDiscountAmount = discountResult.getTotalDiscountAmounts();
 
         // then
-        assertThat(discountAmount).isEqualTo(Money.of(0));
+        assertThat(totalDiscountAmount).isEqualTo(Money.of(0));
     }
 }

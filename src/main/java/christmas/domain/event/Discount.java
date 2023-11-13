@@ -23,4 +23,8 @@ public class Discount {
 
         return discountStrategy.calculateDiscountAmount(reservation);
     }
+
+    public DiscountType getDiscountType() {
+        return discountType;
+    }
 }
