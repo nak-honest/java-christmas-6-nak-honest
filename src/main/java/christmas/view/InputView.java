@@ -2,6 +2,8 @@ package christmas.view;
 
 import static christmas.ErrorMessage.INVALID_DAY_ERROR;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -28,10 +30,14 @@ public class InputView {
         }
     }
 
-    public String readMenus() {
+    public List<String> readMenus() {
         writer.writeLine(MENU_INPUT_MESSAGE);
-        String input = reader.get();
+        List<String> orderItems = splitOrderItems(reader.get());
 
-        return input;
+        return orderItems;
+    }
+
+    private List<String> splitOrderItems(String input) {
+        return Arrays.asList(input.split(ORDER_ITEM_DELIMITER));
     }
 }
