@@ -31,6 +31,6 @@ public class ChristmasDDayDiscountFactory {
                 DailyAccumulateDiscountStrategy.of(START_DATE, BASE_DISCOUNT_AMOUNT, DISCOUNT_AMOUNT_PER_DAY);
         EventRule discountRule = new DaysEventRule(DISCOUNT_DAYS);
 
-        return new Discount(EventName.CHRISTMAS_D_DAY, discountStrategy, discountRule);
+        return new Discount(EventName.CHRISTMAS_D_DAY_DISCOUNT, discountStrategy, discountRule);
     }
 }

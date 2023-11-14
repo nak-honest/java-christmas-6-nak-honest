@@ -25,13 +25,13 @@ public class DaysOfWeekDiscountFactory {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.DESSERT, DISCOUNT_AMOUNT_PER_MENU);
         EventRule discountRule = new DaysOfWeekEventRule(WEEKDAYS);
 
-        return new Discount(EventName.WEEKDAY, discountStrategy, discountRule);
+        return new Discount(EventName.WEEKDAY_DISCOUNT, discountStrategy, discountRule);
     }
 
     public static Discount createWeekendsDiscount() {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.MAIN, DISCOUNT_AMOUNT_PER_MENU);
         EventRule discountRule = new DaysOfWeekEventRule(WEEKENDS);
 
-        return new Discount(EventName.WEEKEND, discountStrategy, discountRule);
+        return new Discount(EventName.WEEKEND_DISCOUNT, discountStrategy, discountRule);
     }
 }

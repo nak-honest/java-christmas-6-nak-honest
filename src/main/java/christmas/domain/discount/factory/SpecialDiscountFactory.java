@@ -28,6 +28,6 @@ public class SpecialDiscountFactory {
         DiscountStrategy discountStrategy = DailyAccumulateDiscountStrategy.fixed(DISCOUNT_AMOUNT);
         EventRule discountRule = new DaysEventRule(DISCOUNT_DAYS);
 
-        return new Discount(EventName.SPECIAL, discountStrategy, discountRule);
+        return new Discount(EventName.SPECIAL_DISCOUNT, discountStrategy, discountRule);
     }
 }

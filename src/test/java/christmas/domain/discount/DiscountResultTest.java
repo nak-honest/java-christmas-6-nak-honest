@@ -13,9 +13,9 @@ public class DiscountResultTest {
     void 총_할인_금액을_구할_수_있다() {
         // given
         Map<EventName, Money> discountAmounts = Map.of(
-                EventName.SPECIAL, Money.of(1_000),
-                EventName.WEEKDAY, Money.of(20_230),
-                EventName.WEEKEND, Money.of(20_230)
+                EventName.SPECIAL_DISCOUNT, Money.of(1_000),
+                EventName.WEEKDAY_DISCOUNT, Money.of(20_230),
+                EventName.WEEKEND_DISCOUNT, Money.of(20_230)
         );
         DiscountResult discountResult = new DiscountResult(discountAmounts);
 

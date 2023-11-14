@@ -43,7 +43,7 @@ public class EventResult {
 
     public Map<String, Integer> getBenefitResult() {
         Map<EventName, Money> benefitResult = new HashMap<>(discountResult.getDiscountResult());
-        benefitResult.put(EventName.GIVEAWAY, menuGiveaway.getPrice());
+        benefitResult.put(EventName.GIVEAWAY_EVENT, menuGiveaway.getPrice());
 
         return benefitResult.entrySet().stream()
                 .filter(entry -> !entry.getValue().equals(Money.zeroInstance()))
