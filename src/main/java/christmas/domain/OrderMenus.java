@@ -8,6 +8,8 @@ import christmas.domain.menu.MenuType;
 import java.util.Map;
 
 public class OrderMenus {
+    private static final int MAX_MENU_COUNT = 20;
+
     private final Map<Menu, Integer> orderMenus;
 
     public OrderMenus(Map<Menu, Integer> orderMenus) {
@@ -17,10 +19,17 @@ public class OrderMenus {
 
     private void validate() {
         validateMenuCount();
+        validateTotalMenuCount();
     }
 
     private void validateMenuCount() {
         if (orderMenus.values().stream().anyMatch(count -> count <= 0)) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
+    }
+
+    private void validateTotalMenuCount() {
+        if (orderMenus.values().stream().mapToInt(Integer::intValue).sum() > MAX_MENU_COUNT) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
     }
