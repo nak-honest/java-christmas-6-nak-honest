@@ -16,6 +16,7 @@ public class MenuTypeDiscountStrategy implements DiscountStrategy {
     @Override
     public Money calculateDiscountAmount(Reservation reservation) {
         int discountMenuCount = reservation.countMenuByType(discountMenuType);
+
         return discountAmountPerMenu.multiply(discountMenuCount);
     }
 }

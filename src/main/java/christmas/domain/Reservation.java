@@ -23,8 +23,7 @@ public class Reservation {
     }
 
     public boolean isDayIn(Collection<LocalDate> days) {
-        return days.stream()
-                .anyMatch(visitDate::equals);
+        return days.stream().anyMatch(visitDate::equals);
     }
 
     public boolean isDayOfWeekIn(Collection<DayOfWeek> daysOfWeek) {

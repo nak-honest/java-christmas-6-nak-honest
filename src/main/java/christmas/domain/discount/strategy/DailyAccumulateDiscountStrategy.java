@@ -27,6 +27,7 @@ public class DailyAccumulateDiscountStrategy implements DiscountStrategy {
     @Override
     public Money calculateDiscountAmount(Reservation reservation) {
         int daysFromBaseDate = reservation.daysFrom(baseDate);
+
         return baseAmount.add(increaseAmountPerDay.multiply(daysFromBaseDate));
     }
 }

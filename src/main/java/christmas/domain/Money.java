@@ -26,6 +26,7 @@ public class Money implements Comparable<Money> {
         if (amount == 0) {
             return ZERO_AMOUNT;
         }
+
         return new Money(amount);
     }
 
