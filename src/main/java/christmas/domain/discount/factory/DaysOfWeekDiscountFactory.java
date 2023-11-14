@@ -8,7 +8,6 @@ import christmas.domain.rule.EventRule;
 import christmas.domain.discount.strategy.DiscountStrategy;
 import christmas.domain.discount.strategy.MenuTypeDiscountStrategy;
 import christmas.domain.menu.MenuType;
-
 import java.time.DayOfWeek;
 import java.util.Set;
 

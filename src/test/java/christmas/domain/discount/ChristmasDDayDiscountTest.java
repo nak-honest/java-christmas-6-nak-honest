@@ -1,20 +1,18 @@
 package christmas.domain.discount;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.Discount;
 import christmas.domain.discount.factory.ChristmasDDayDiscountFactory;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Map;
 import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class ChristmasDDayDiscountTest {
     static IntStream provideDiscountDaysAndDiscountAmount() {

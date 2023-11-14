@@ -4,8 +4,10 @@ import christmas.domain.EventName;
 import christmas.domain.Money;
 import christmas.domain.Reservation;
 import christmas.domain.rule.EventRule;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public class Discounts {
     private final List<Discount> discounts;
@@ -18,13 +20,11 @@ public class Discounts {
 
     public DiscountResult discount(Reservation reservation) {
         Map<EventName, Money> discountResult = new EnumMap<>(EventName.class);
-
         if (!commonRule.isSatisfiedBy(reservation)) {
             return new DiscountResult(discountResult);
         }
 
-        discounts.forEach(discount ->
-                discountResult.put(discount.getEventName(), discount.discount(reservation)));
+        discounts.forEach(discount -> discountResult.put(discount.getEventName(), discount.discount(reservation)));
 
         return new DiscountResult(discountResult);
     }

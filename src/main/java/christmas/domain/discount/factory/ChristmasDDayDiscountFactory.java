@@ -7,7 +7,6 @@ import christmas.domain.rule.DaysEventRule;
 import christmas.domain.discount.strategy.DailyAccumulateDiscountStrategy;
 import christmas.domain.discount.strategy.DiscountStrategy;
 import christmas.domain.rule.EventRule;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;

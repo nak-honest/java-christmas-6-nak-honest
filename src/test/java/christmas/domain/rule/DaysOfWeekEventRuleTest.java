@@ -1,12 +1,10 @@
 package christmas.domain.rule;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
 import christmas.domain.menu.Menu;
-import christmas.domain.rule.DaysOfWeekEventRule;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class DaysOfWeekEventRuleTest {
     static final int TEST_YEAR = 2023;

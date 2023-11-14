@@ -1,7 +1,6 @@
 package christmas.domain.badge;
 
 import christmas.domain.Money;
-
 import java.util.Arrays;
 import java.util.Comparator;
 

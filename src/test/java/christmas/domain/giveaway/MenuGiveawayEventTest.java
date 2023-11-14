@@ -1,15 +1,13 @@
 package christmas.domain.giveaway;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class MenuGiveawayEventTest {
     @Test

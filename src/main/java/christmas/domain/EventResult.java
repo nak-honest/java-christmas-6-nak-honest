@@ -3,7 +3,6 @@ package christmas.domain;
 import christmas.domain.badge.EventBadge;
 import christmas.domain.discount.DiscountResult;
 import christmas.domain.menu.Menu;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

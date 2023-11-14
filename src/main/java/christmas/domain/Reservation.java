@@ -1,8 +1,6 @@
 package christmas.domain;
 
-import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Collection;

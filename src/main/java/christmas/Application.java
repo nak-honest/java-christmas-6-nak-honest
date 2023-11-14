@@ -12,7 +12,6 @@ import christmas.service.ReservationService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.view.Writer;
-
 import java.time.Month;
 
 public class Application {

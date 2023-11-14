@@ -1,13 +1,12 @@
 package christmas.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.badge.EventBadge;
 import christmas.domain.discount.DiscountResult;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.api.Test;
-
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class EventResultTest {
     @Test

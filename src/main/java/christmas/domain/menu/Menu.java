@@ -2,7 +2,6 @@ package christmas.domain.menu;
 
 import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 import christmas.domain.Money;
-
 import java.util.Arrays;
 
 public enum Menu {

@@ -1,20 +1,18 @@
 package christmas.domain.discount.strategy;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.strategy.DailyAccumulateDiscountStrategy;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class DailyAccumulateDiscountStrategyTest {
     static final int TEST_YEAR = 2023;

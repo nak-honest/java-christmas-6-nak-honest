@@ -4,8 +4,6 @@ import christmas.domain.Reservation;
 import christmas.domain.rule.EventRule;
 import christmas.domain.menu.Menu;
 
-import java.util.Optional;
-
 public class MenuGiveawayEvent {
     private final Menu menuGiveaway;
     private final EventRule eventRule;

@@ -3,12 +3,11 @@ package christmas.domain;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.time.Month;
+import java.util.stream.IntStream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.time.Month;
-import java.util.stream.IntStream;
 
 public class EventMonthDatesTest {
     @ParameterizedTest

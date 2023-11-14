@@ -2,7 +2,6 @@ package christmas.view;
 
 import christmas.domain.badge.EventBadge;
 import christmas.dto.EventResultDto;
-
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.function.Consumer;

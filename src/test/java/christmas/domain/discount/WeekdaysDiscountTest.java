@@ -1,20 +1,18 @@
 package christmas.domain.discount;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.Discount;
 import christmas.domain.discount.factory.DaysOfWeekDiscountFactory;
-import christmas.domain.menu.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
+import christmas.domain.menu.Menu;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class WeekdaysDiscountTest {
     static final LocalDate WEEKEND = LocalDate.of(2023, 12, 1);

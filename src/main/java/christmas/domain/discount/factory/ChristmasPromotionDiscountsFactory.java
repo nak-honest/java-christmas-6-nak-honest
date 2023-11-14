@@ -5,7 +5,6 @@ import christmas.domain.discount.Discount;
 import christmas.domain.discount.Discounts;
 import christmas.domain.rule.EventRule;
 import christmas.domain.rule.TotalPriceEventRule;
-
 import java.util.List;
 
 public class ChristmasPromotionDiscountsFactory {

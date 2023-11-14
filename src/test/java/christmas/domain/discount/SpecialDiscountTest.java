@@ -1,14 +1,12 @@
 package christmas.domain.discount;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.Discount;
 import christmas.domain.discount.factory.SpecialDiscountFactory;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -16,8 +14,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class SpecialDiscountTest {
     static final Set<LocalDate> DATES_WITH_STAR = IntStream.rangeClosed(1, 31)

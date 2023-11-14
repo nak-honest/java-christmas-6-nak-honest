@@ -1,20 +1,18 @@
 package christmas.domain.rule;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
 import christmas.domain.menu.Menu;
-import christmas.domain.rule.DaysEventRule;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class DaysEventRuleTest {
     static final Set<LocalDate> EVENT_DAYS = IntStream.rangeClosed(1, 15)

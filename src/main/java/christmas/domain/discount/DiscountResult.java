@@ -2,7 +2,6 @@ package christmas.domain.discount;
 
 import christmas.domain.EventName;
 import christmas.domain.Money;
-
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;

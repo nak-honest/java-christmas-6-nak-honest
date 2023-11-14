@@ -1,17 +1,16 @@
 package christmas.domain.discount;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
 import christmas.domain.discount.factory.ChristmasPromotionDiscountsFactory;
 import christmas.domain.menu.Menu;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class ChristmasPromotionDiscountsTest {
     static final Discounts CHRISTMAS_PROMOTION_DISCOUNTS = ChristmasPromotionDiscountsFactory.create();
