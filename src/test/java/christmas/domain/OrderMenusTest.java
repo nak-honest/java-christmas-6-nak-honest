@@ -51,4 +51,19 @@ public class OrderMenusTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
+
+    static Stream<Arguments> provideOnlyBeverageMenus() {
+        return Stream.of(
+                Arguments.of(Map.of(Menu.ZERO_COKE, 3)),
+                Arguments.of(Map.of(Menu.ZERO_COKE, 3, Menu.RED_WINE, 3))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideOnlyBeverageMenus")
+    void 음료_메뉴만_주문하면_예외를_발생시킨다(Map<Menu, Integer> menus) {
+        assertThatThrownBy(() -> new OrderMenus(menus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
 }

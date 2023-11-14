@@ -22,8 +22,7 @@ public class TotalPriceEventRuleTest {
         return Stream.of(
                 Arguments.of(Map.of(Menu.ICE_CREAM, 2)), // 10,000원
                 Arguments.of(Map.of(Menu.ICE_CREAM, 1, Menu.CHOCOLATE_CAKE, 1)), // 20,000원
-                Arguments.of(Map.of(Menu.T_BONE_STEAK, 3)), // 165,000원
-                Arguments.of(Map.of(Menu.RED_WINE, 1)) // 60,000원
+                Arguments.of(Map.of(Menu.T_BONE_STEAK, 3)) // 165,000원
         );
     }
 
@@ -43,7 +42,7 @@ public class TotalPriceEventRuleTest {
     static Stream<Arguments> provideMenusLessThanMinPrice() {
         return Stream.of(
                 Arguments.of(Map.of(Menu.ICE_CREAM, 1)), // 5,000원
-                Arguments.of(Map.of(Menu.ZERO_COKE, 3)), // 9,000원
+                Arguments.of(Map.of(Menu.ZERO_COKE, 1, Menu.BUTTON_MUSHROOM_SOUP, 1)), // 9,000원
                 Arguments.of(Map.of(Menu.TAPAS, 1)) // 5,500원
         );
     }

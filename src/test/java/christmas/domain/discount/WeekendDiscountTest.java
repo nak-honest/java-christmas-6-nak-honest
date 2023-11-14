@@ -27,7 +27,6 @@ public class WeekendDiscountTest {
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 3), 6_069),
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 2, Menu.TAPAS, 1), 4_046),
                 Arguments.of(Map.of(Menu.ICE_CREAM, 3), 0),
-                Arguments.of(Map.of(Menu.RED_WINE, 3), 0),
                 Arguments.of(Map.of(Menu.CAESAR_SALAD, 3), 0)
         );
     }
@@ -53,7 +52,6 @@ public class WeekendDiscountTest {
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 3)),
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 2, Menu.TAPAS, 1)),
                 Arguments.of(Map.of(Menu.ICE_CREAM, 3)),
-                Arguments.of(Map.of(Menu.RED_WINE, 3)),
                 Arguments.of(Map.of(Menu.CAESAR_SALAD, 3))
         );
     }

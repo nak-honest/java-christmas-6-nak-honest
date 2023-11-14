@@ -3,8 +3,6 @@ package christmas.domain.discount;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.Reservation;
-import christmas.domain.discount.DiscountResult;
-import christmas.domain.discount.Discounts;
 import christmas.domain.discount.factory.ChristmasPromotionDiscountsFactory;
 import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.Test;
@@ -36,7 +34,7 @@ public class ChristmasPromotionDiscountsTest {
     void 총주문_금액이_10_000원_미만이라면_할인을_적용하지_않는다() {
         // given
         LocalDate visitDate = LocalDate.of(2023, Month.DECEMBER, 25);
-        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.ZERO_COKE, 1)));
+        Reservation reservation = new Reservation(visitDate, new OrderMenus(Map.of(Menu.TAPAS, 1)));
 
         // when
         DiscountResult discountResult = CHRISTMAS_PROMOTION_DISCOUNTS.discount(reservation);

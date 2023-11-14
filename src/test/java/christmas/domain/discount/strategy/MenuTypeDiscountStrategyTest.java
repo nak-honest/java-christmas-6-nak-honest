@@ -21,7 +21,7 @@ public class MenuTypeDiscountStrategyTest {
 
     static Stream<Arguments> provideMenusAndDiscountAmount() {
         return Stream.of(
-                Arguments.of(Map.of(Menu.RED_WINE, 2), 0),
+                Arguments.of(Map.of(Menu.TAPAS, 2), 0),
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 1), 1_000),
                 Arguments.of(Map.of(Menu.BARBECUE_RIB, 2), 2_000),
                 Arguments.of(Map.of(Menu.RED_WINE, 2, Menu.BARBECUE_RIB, 1), 1_000),

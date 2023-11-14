@@ -26,7 +26,7 @@ public class ChristmasChampagneGiveawayEventTest {
                         Menu.BARBECUE_RIB, 2 // 108,000원
                 )),
                 Arguments.of(Map.of(
-                        Menu.RED_WINE, 2 // 120,000원
+                        Menu.BUTTON_MUSHROOM_SOUP, 20 // 120,000원
                 ))
         );
     }

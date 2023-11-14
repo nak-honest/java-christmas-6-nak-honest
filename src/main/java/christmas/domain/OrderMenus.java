@@ -25,6 +25,7 @@ public class OrderMenus {
     private void validate() {
         validateMenuCount();
         validateTotalMenuCount();
+        validateOnlyBeverageOrder();
     }
 
     private void validateMenuCount() {
@@ -35,6 +36,12 @@ public class OrderMenus {
 
     private void validateTotalMenuCount() {
         if (orderMenus.values().stream().mapToInt(Integer::intValue).sum() > MAX_TOTAL_MENU_COUNT) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
+    }
+
+    private void validateOnlyBeverageOrder() {
+        if (orderMenus.keySet().stream().allMatch(menu -> menu.isTypeOf(MenuType.BEVERAGE))) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
     }
