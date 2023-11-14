@@ -24,6 +24,7 @@ public class OutputView {
     private static final String TOTAL_PRICE_HEADER = "할인 전 총주문 금액";
     private static final String MENU_GIVEAWAY_HEADER = "증정 메뉴";
     private static final String BENEFIT_RESULT_HEADER = "혜택 내역";
+    private static final String BENEFIT_TOTAL_AMOUNT_HEADER = "총 혜택 금액";
     private static final int MENU_GIVEAWAY_COUNT = 1;
 
     private final Writer writer;
@@ -64,6 +65,8 @@ public class OutputView {
     public void writeEventResult(EventResult eventResult) {
         writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResult.getMenuGiveaway());
         writeResultSection(BENEFIT_RESULT_HEADER, this::writeBenefitResult, eventResult.getBenefitResult());
+        writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
+                eventResult.getTotalBenefitAmount());
     }
 
     private void writeMenuGiveaway(Menu menuGiveaway) {
@@ -90,5 +93,9 @@ public class OutputView {
         return benefitResult.entrySet().stream()
                 .filter(entry -> !entry.getValue().equals(Money.zeroInstance()))
                 .collect(Collectors.toMap(entry -> entry.getKey().getName(), entry -> -entry.getValue().getAmount()));
+    }
+
+    private void writeTotalBenefitAmount(Money totalBenefitAmount) {
+        writer.writeLine(String.format(PRICE_FORMAT, -totalBenefitAmount.getAmount()));
     }
 }
