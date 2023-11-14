@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.ErrorMessage.INVALID_MENU_ERROR;
+
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 
@@ -10,6 +12,17 @@ public class OrderMenus {
 
     public OrderMenus(Map<Menu, Integer> orderMenus) {
         this.orderMenus = Map.copyOf(orderMenus);
+        validate();
+    }
+
+    private void validate() {
+        validateMenuCount();
+    }
+
+    private void validateMenuCount() {
+        if (orderMenus.values().stream().anyMatch(count -> count <= 0)) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
     }
 
     public int countMenuByType(MenuType menuType) {
