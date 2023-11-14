@@ -1,10 +1,12 @@
 package christmas.domain;
 
+import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Map;
 
 public class Reservation {
     private final LocalDate visitDate;
@@ -39,5 +41,13 @@ public class Reservation {
 
     public int countMenuByType(MenuType menuType) {
         return orderMenus.countMenuByType(menuType);
+    }
+
+    public LocalDate getVisitDate() {
+        return visitDate;
+    }
+
+    public Map<Menu, Integer> getOrderMenus() {
+        return orderMenus.getOrderMenus();
     }
 }
