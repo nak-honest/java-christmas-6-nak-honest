@@ -5,6 +5,7 @@ import christmas.domain.Reservation;
 import christmas.dto.EventResultDto;
 import christmas.service.EventService;
 import christmas.service.ReservationService;
+import christmas.util.ExceptionRetryHandler;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -37,11 +38,21 @@ public class EventPlanner {
         outputView.writeEventResult(EventResultDto.of(reservation, eventResult));
     }
 
-    public Reservation reserve() {
-        int visitDay = inputView.readVisitDay();
-        LocalDate visitDate = reservationService.getVisitDate(visitDay);
+    private Reservation reserve() {
+        LocalDate visitDate = ExceptionRetryHandler.retryUntilValid(this::getVisitDate);
 
+        return ExceptionRetryHandler.retryUntilValid(this::getReservation, visitDate);
+    }
+
+    private LocalDate getVisitDate() {
+        int visitDay = inputView.readVisitDay();
+
+        return reservationService.getVisitDate(visitDay);
+    }
+
+    private Reservation getReservation(LocalDate visitDate) {
         List<Map.Entry<String, Integer>> orderMenus = inputView.readOrderMenus();
+
         return reservationService.getReservation(visitDate, orderMenus);
     }
 }
