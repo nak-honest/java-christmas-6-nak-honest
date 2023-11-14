@@ -11,6 +11,7 @@ public class ExceptionRetryHandler {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + System.lineSeparator());
             }
         }
     }
@@ -20,6 +21,7 @@ public class ExceptionRetryHandler {
             try {
                 return function.apply(argument);
             } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + System.lineSeparator());
             }
         }
     }
