@@ -1,5 +1,7 @@
 package christmas.view;
 
+import org.assertj.core.data.MapEntry;
+
 import static christmas.ErrorMessage.INVALID_DAY_ERROR;
 import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 
@@ -33,12 +35,13 @@ public class InputView {
         }
     }
 
-    public Map<String, Integer> readMenus() {
+    public List<Map.Entry<String, Integer>> readMenus() {
         writer.writeLine(MENU_INPUT_MESSAGE);
         List<String> orderItems = splitOrderItems(reader.get());
 
         return orderItems.stream()
-                .collect(Collectors.toMap(this::toMenuName, this::toOrderCount));
+                .map(menuItem -> Map.entry(toMenuName(menuItem), toOrderCount(menuItem)))
+                .toList();
     }
 
     private List<String> splitOrderItems(String input) {

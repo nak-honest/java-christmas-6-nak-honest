@@ -5,15 +5,20 @@ import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OrderMenus {
-    private static final int MAX_MENU_COUNT = 20;
+    private static final int MIN_MENU_COUNT = 1;
+    private static final int MAX_TOTAL_MENU_COUNT = 20;
 
     private final Map<Menu, Integer> orderMenus;
 
     public OrderMenus(Map<Menu, Integer> orderMenus) {
-        this.orderMenus = Map.copyOf(orderMenus);
+        this.orderMenus = new EnumMap<>(orderMenus);
         validate();
     }
 
@@ -23,13 +28,27 @@ public class OrderMenus {
     }
 
     private void validateMenuCount() {
-        if (orderMenus.values().stream().anyMatch(count -> count <= 0)) {
+        if (orderMenus.values().stream().anyMatch(count -> count < MIN_MENU_COUNT)) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
     }
 
     private void validateTotalMenuCount() {
-        if (orderMenus.values().stream().mapToInt(Integer::intValue).sum() > MAX_MENU_COUNT) {
+        if (orderMenus.values().stream().mapToInt(Integer::intValue).sum() > MAX_TOTAL_MENU_COUNT) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
+    }
+
+    public static OrderMenus createFromDistinctMenus(List<Map.Entry<Menu, Integer>> menus) {
+        List<Map.Entry<Menu, Integer>> orderMenus = new ArrayList<>(menus);
+        validateDuplicateMenu(orderMenus);
+
+        return new OrderMenus(orderMenus.stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+    }
+
+    private static void validateDuplicateMenu(List<Map.Entry<Menu, Integer>> orderMenus) {
+        if (orderMenus.stream().map(Map.Entry::getKey).distinct().count() != orderMenus.size()) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
     }

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -32,6 +33,21 @@ public class OrderMenusTest {
     @MethodSource("provideMenusMoreThanMaxCount")
     void 주문_메뉴의_총_개수가_20개보다_많다면_예외를_발생시킨다(Map<Menu, Integer> menus) {
         assertThatThrownBy(() -> new OrderMenus(menus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
+    static Stream<Arguments> provideDuplicateMenus() {
+        return Stream.of(
+                Arguments.of(List.of(Map.entry(Menu.BARBECUE_RIB, 1), Map.entry(Menu.BARBECUE_RIB, 1))),
+                Arguments.of(List.of(Map.entry(Menu.ICE_CREAM, 1), Map.entry(Menu.ICE_CREAM, 3)))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideDuplicateMenus")
+    void 중복된_메뉴가_있다면_예외를_발생시킨다(List<Map.Entry<Menu, Integer>> menus) {
+        assertThatThrownBy(() -> OrderMenus.createFromDistinctMenus(menus))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
