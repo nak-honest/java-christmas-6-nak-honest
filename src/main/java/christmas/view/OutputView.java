@@ -1,16 +1,10 @@
 package christmas.view;
 
-import christmas.domain.EventResult;
-import christmas.domain.Money;
-import christmas.domain.Reservation;
-import christmas.domain.EventName;
-import christmas.domain.menu.Menu;
 import christmas.dto.EventResultDto;
 
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -26,7 +20,7 @@ public class OutputView {
     private static final String MENU_GIVEAWAY_HEADER = "증정 메뉴";
     private static final String BENEFIT_RESULT_HEADER = "혜택 내역";
     private static final String BENEFIT_TOTAL_AMOUNT_HEADER = "총 혜택 금액";
-    private static final int MENU_GIVEAWAY_COUNT = 1;
+    private static final String PAYMENT_AMOUNT_HEADER = "할인 후 예상 결제 금액";
 
     private final Writer writer;
 
@@ -41,11 +35,12 @@ public class OutputView {
     public void writeEventResult(EventResultDto eventResultDto) {
         writeEventResultHeader(eventResultDto.visitDate());
         writeResultSection(ORDER_MENU_HEADER, this::writeOrderMenus, eventResultDto.orderMenus());
-        writeResultSection(TOTAL_PRICE_HEADER, this::writeTotalPrice, eventResultDto.totalOrderPrice());
+        writeResultSection(TOTAL_PRICE_HEADER, this::writePrice, eventResultDto.totalOrderPrice());
         writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResultDto.menuGiveaway());
         writeResultSection(BENEFIT_RESULT_HEADER, this::writeBenefitResult, eventResultDto.benefitResult());
         writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
                 eventResultDto.totalBenefitAmount());
+        writeResultSection(PAYMENT_AMOUNT_HEADER, this::writePrice, eventResultDto.paymentAmount());
     }
 
     private void writeEventResultHeader(LocalDate visitDate) {
@@ -63,8 +58,8 @@ public class OutputView {
         orderMenus.forEach((menuName, count) -> writer.writeLine(String.format(MENU_FORMAT, menuName, count)));
     }
 
-    private void writeTotalPrice(int totalPrice) {
-        writer.writeLine(String.format(PRICE_FORMAT, totalPrice));
+    private void writePrice(int price) {
+        writer.writeLine(String.format(PRICE_FORMAT, price));
     }
 
     private void writeMenuGiveaway(Map<String, Integer> menuGiveaway) {
