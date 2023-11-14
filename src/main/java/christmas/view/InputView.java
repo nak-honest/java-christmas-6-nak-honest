@@ -12,6 +12,7 @@ public class InputView {
     private static final String MENU_INPUT_MESSAGE =
             "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     private static final String ORDER_ITEM_DELIMITER = ",";
+    private static final String ORDER_MENU_COUNT_DELIMITER = "-";
 
     private final Supplier<String> reader;
     private final Writer writer;
@@ -39,5 +40,13 @@ public class InputView {
 
     private List<String> splitOrderItems(String input) {
         return Arrays.asList(input.split(ORDER_ITEM_DELIMITER));
+    }
+
+    private Map<String, Integer> splitOrderMenuAndCount(String orderItem) {
+        String[] orderMenuAndCount = orderItem.split(ORDER_MENU_COUNT_DELIMITER);
+        String orderMenu = orderMenuAndCount[0];
+        int orderCount = Integer.parseInt(orderMenuAndCount[1]);
+
+        return Map.of(orderMenu, orderCount);
     }
 }
