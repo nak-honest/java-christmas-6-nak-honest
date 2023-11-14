@@ -62,4 +62,8 @@ public class Money implements Comparable<Money> {
     public int compareTo(Money money) {
         return Integer.compare(this.amount, money.amount);
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }

@@ -68,7 +68,7 @@ public class OrderMenus {
         return getTotalPrice().isGreaterThanOrEqual(amount);
     }
 
-    private Money getTotalPrice() {
+    public Money getTotalPrice() {
         return orderMenus.entrySet().stream()
                 .map(this::getPrice)
                 .reduce(Money.zeroInstance(), Money::add);

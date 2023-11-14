@@ -50,4 +50,8 @@ public class Reservation {
     public Map<Menu, Integer> getOrderMenus() {
         return orderMenus.getOrderMenus();
     }
+
+    public Money getTotalPrice() {
+        return orderMenus.getTotalPrice();
+    }
 }
