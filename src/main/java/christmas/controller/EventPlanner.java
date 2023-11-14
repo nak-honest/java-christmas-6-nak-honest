@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.EventResult;
 import christmas.domain.Reservation;
+import christmas.dto.EventResultDto;
 import christmas.service.EventService;
 import christmas.service.ReservationService;
 import christmas.view.InputView;
@@ -17,10 +18,12 @@ public class EventPlanner {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public EventPlanner(ReservationService reservationService,
-                        EventService eventService,
-                        InputView inputView,
-                        OutputView outputView) {
+    public EventPlanner(
+            ReservationService reservationService,
+            EventService eventService,
+            InputView inputView,
+            OutputView outputView
+    ) {
         this.reservationService = reservationService;
         this.eventService = eventService;
         this.inputView = inputView;
@@ -31,9 +34,7 @@ public class EventPlanner {
         outputView.writeStartMessage();
         Reservation reservation = reserve();
         EventResult eventResult = eventService.getEventResult(reservation);
-
-        outputView.writeReservation(reservation);
-        outputView.writeEventResult(eventResult);
+        outputView.writeEventResult(EventResultDto.of(reservation, eventResult));
     }
 
     public Reservation reserve() {

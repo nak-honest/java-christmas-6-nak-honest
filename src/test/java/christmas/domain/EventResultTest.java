@@ -22,9 +22,9 @@ public class EventResultTest {
         EventResult eventResult = new EventResult(discountResult, menuGiveaway, EventBadge.SANTA);
 
         // when
-        Money totalBenefitAmount = eventResult.getTotalBenefitAmount();
+        int totalBenefitAmount = eventResult.getTotalBenefitAmount();
 
         // then
-        assertThat(totalBenefitAmount).isEqualTo(Money.of(48_230));
+        assertThat(totalBenefitAmount).isEqualTo(48_230);
     }
 }

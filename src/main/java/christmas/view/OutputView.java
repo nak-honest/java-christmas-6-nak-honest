@@ -5,6 +5,7 @@ import christmas.domain.Money;
 import christmas.domain.Reservation;
 import christmas.domain.EventName;
 import christmas.domain.menu.Menu;
+import christmas.dto.EventResultDto;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -33,20 +34,18 @@ public class OutputView {
         this.writer = writer;
     }
 
-    private <T> void writeResultSection(String header, Consumer<T> writeResult, T result) {
-        writer.writeLine(String.format(SECTION_HEADER_FORMAT, header));
-        writeResult.accept(result);
-        writer.writeLine(EMPTY_LINE);
-    }
-
     public void writeStartMessage() {
         writer.writeLine(START_MESSAGE);
     }
 
-    public void writeReservation(Reservation reservation) {
-        writeEventResultHeader(reservation.getVisitDate());
-        writeResultSection(ORDER_MENU_HEADER, this::writeOrderMenus, reservation.getOrderMenus());
-        writeResultSection(TOTAL_PRICE_HEADER, this::writeTotalPrice, reservation.getTotalPrice());
+    public void writeEventResult(EventResultDto eventResultDto) {
+        writeEventResultHeader(eventResultDto.visitDate());
+        writeResultSection(ORDER_MENU_HEADER, this::writeOrderMenus, eventResultDto.orderMenus());
+        writeResultSection(TOTAL_PRICE_HEADER, this::writeTotalPrice, eventResultDto.totalOrderPrice());
+        writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResultDto.menuGiveaway());
+        writeResultSection(BENEFIT_RESULT_HEADER, this::writeBenefitResult, eventResultDto.benefitResult());
+        writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
+                eventResultDto.totalBenefitAmount());
     }
 
     private void writeEventResultHeader(LocalDate visitDate) {
@@ -54,48 +53,40 @@ public class OutputView {
         writer.writeLine(EMPTY_LINE);
     }
 
-    private void writeOrderMenus(Map<Menu, Integer> orderMenus) {
-        orderMenus.forEach((menu, count) -> writer.writeLine(String.format(MENU_FORMAT, menu.getName(), count)));
+    private <T> void writeResultSection(String header, Consumer<T> writeResult, T result) {
+        writer.writeLine(String.format(SECTION_HEADER_FORMAT, header));
+        writeResult.accept(result);
+        writer.writeLine(EMPTY_LINE);
     }
 
-    private void writeTotalPrice(Money totalPrice) {
-        writer.writeLine(String.format(PRICE_FORMAT, totalPrice.getAmount()));
+    private void writeOrderMenus(Map<String, Integer> orderMenus) {
+        orderMenus.forEach((menuName, count) -> writer.writeLine(String.format(MENU_FORMAT, menuName, count)));
     }
 
-    public void writeEventResult(EventResult eventResult) {
-        writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResult.getMenuGiveaway());
-        writeResultSection(BENEFIT_RESULT_HEADER, this::writeBenefitResult, eventResult.getBenefitResult());
-        writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
-                eventResult.getTotalBenefitAmount());
+    private void writeTotalPrice(int totalPrice) {
+        writer.writeLine(String.format(PRICE_FORMAT, totalPrice));
     }
 
-    private void writeMenuGiveaway(Menu menuGiveaway) {
-        if (menuGiveaway.equals(Menu.NONE)) {
+    private void writeMenuGiveaway(Map<String, Integer> menuGiveaway) {
+        if (menuGiveaway.isEmpty()) {
             writer.writeLine(NO_RESULT_MESSAGE);
             return;
         }
 
-        writer.writeLine(String.format(MENU_FORMAT, menuGiveaway.getName(), MENU_GIVEAWAY_COUNT));
+        writeOrderMenus(menuGiveaway);
     }
 
-    private void writeBenefitResult(Map<EventName, Money> benefitResult) {
-        Map<String, Integer> benefitResultNoZeroAmount = getBenefitResultNoZeroAmount(benefitResult);
-        if (benefitResultNoZeroAmount.isEmpty()) {
+    private void writeBenefitResult(Map<String, Integer> benefitResult) {
+        if (benefitResult.isEmpty()) {
             writer.writeLine(NO_RESULT_MESSAGE);
             return;
         }
 
-        benefitResultNoZeroAmount.forEach((eventName, amount) ->
-                writer.writeLine(String.format(BENEFIT_RESULT_FORMAT, eventName, amount)));
+        benefitResult.forEach((eventName, amount) ->
+                writer.writeLine(String.format(BENEFIT_RESULT_FORMAT, eventName, -amount)));
     }
 
-    private Map<String, Integer> getBenefitResultNoZeroAmount(Map<EventName, Money> benefitResult) {
-        return benefitResult.entrySet().stream()
-                .filter(entry -> !entry.getValue().equals(Money.zeroInstance()))
-                .collect(Collectors.toMap(entry -> entry.getKey().getName(), entry -> -entry.getValue().getAmount()));
-    }
-
-    private void writeTotalBenefitAmount(Money totalBenefitAmount) {
-        writer.writeLine(String.format(PRICE_FORMAT, -totalBenefitAmount.getAmount()));
+    private void writeTotalBenefitAmount(int totalBenefitAmount) {
+        writer.writeLine(String.format(PRICE_FORMAT, -totalBenefitAmount));
     }
 }

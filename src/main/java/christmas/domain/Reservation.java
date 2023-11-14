@@ -7,6 +7,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Reservation {
     private final LocalDate visitDate;
@@ -47,11 +48,12 @@ public class Reservation {
         return visitDate;
     }
 
-    public Map<Menu, Integer> getOrderMenus() {
-        return orderMenus.getOrderMenus();
+    public Map<String, Integer> getOrderMenus() {
+        return orderMenus.getOrderMenus().entrySet().stream()
+                .collect(Collectors.toMap(entry -> entry.getKey().getName(), Map.Entry::getValue));
     }
 
-    public Money getTotalPrice() {
-        return orderMenus.getTotalPrice();
+    public int getTotalPrice() {
+        return orderMenus.getTotalPrice().getAmount();
     }
 }
