@@ -4,6 +4,10 @@ import christmas.domain.badge.EventBadge;
 import christmas.domain.discount.DiscountResult;
 import christmas.domain.menu.Menu;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class EventResult {
     private final DiscountResult discountResult;
     private final Menu menuGiveaway;
@@ -24,5 +28,12 @@ public class EventResult {
 
     public Menu getMenuGiveaway() {
         return menuGiveaway;
+    }
+
+    public Map<EventName, Money> getBenefitResult() {
+        Map<EventName, Money> benefitResult = new HashMap<>(discountResult.getDiscountResult());
+        benefitResult.put(EventName.GIVEAWAY, menuGiveaway.getPrice());
+
+        return Collections.unmodifiableMap(benefitResult);
     }
 }

@@ -1,5 +1,6 @@
 package christmas.domain.discount;
 
+import christmas.domain.EventName;
 import christmas.domain.Money;
 import christmas.domain.Reservation;
 import christmas.domain.rule.EventRule;
@@ -16,15 +17,15 @@ public class Discounts {
     }
 
     public DiscountResult discount(Reservation reservation) {
-        Map<DiscountType, Money> discountAmounts = new EnumMap<>(DiscountType.class);
+        Map<EventName, Money> discountResult = new EnumMap<>(EventName.class);
 
         if (!commonRule.isSatisfiedBy(reservation)) {
-            return new DiscountResult(discountAmounts);
+            return new DiscountResult(discountResult);
         }
 
         discounts.forEach(discount ->
-                discountAmounts.put(discount.getDiscountType(), discount.discount(reservation)));
+                discountResult.put(discount.getEventName(), discount.discount(reservation)));
 
-        return new DiscountResult(discountAmounts);
+        return new DiscountResult(discountResult);
     }
 }

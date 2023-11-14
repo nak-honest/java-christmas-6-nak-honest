@@ -2,7 +2,7 @@ package christmas.domain.discount.factory;
 
 import christmas.domain.Money;
 import christmas.domain.discount.Discount;
-import christmas.domain.discount.DiscountType;
+import christmas.domain.EventName;
 import christmas.domain.rule.DaysEventRule;
 import christmas.domain.discount.strategy.DailyAccumulateDiscountStrategy;
 import christmas.domain.discount.strategy.DiscountStrategy;
@@ -31,6 +31,6 @@ public class ChristmasDDayDiscountFactory {
                 DailyAccumulateDiscountStrategy.of(START_DATE, BASE_DISCOUNT_AMOUNT, DISCOUNT_AMOUNT_PER_DAY);
         EventRule discountRule = new DaysEventRule(DISCOUNT_DAYS);
 
-        return new Discount(DiscountType.CHRISTMAS_D_DAY, discountStrategy, discountRule);
+        return new Discount(EventName.CHRISTMAS_D_DAY, discountStrategy, discountRule);
     }
 }

@@ -2,7 +2,7 @@ package christmas.domain.discount.factory;
 
 import christmas.domain.Money;
 import christmas.domain.discount.Discount;
-import christmas.domain.discount.DiscountType;
+import christmas.domain.EventName;
 import christmas.domain.rule.DaysOfWeekEventRule;
 import christmas.domain.rule.EventRule;
 import christmas.domain.discount.strategy.DiscountStrategy;
@@ -25,13 +25,13 @@ public class DaysOfWeekDiscountFactory {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.DESSERT, DISCOUNT_AMOUNT_PER_MENU);
         EventRule discountRule = new DaysOfWeekEventRule(WEEKDAYS);
 
-        return new Discount(DiscountType.WEEKDAY, discountStrategy, discountRule);
+        return new Discount(EventName.WEEKDAY, discountStrategy, discountRule);
     }
 
     public static Discount createWeekendsDiscount() {
         DiscountStrategy discountStrategy = new MenuTypeDiscountStrategy(MenuType.MAIN, DISCOUNT_AMOUNT_PER_MENU);
         EventRule discountRule = new DaysOfWeekEventRule(WEEKENDS);
 
-        return new Discount(DiscountType.WEEKEND, discountStrategy, discountRule);
+        return new Discount(EventName.WEEKEND, discountStrategy, discountRule);
     }
 }
