@@ -1,11 +1,13 @@
 package christmas.view;
 
 import static christmas.ErrorMessage.INVALID_DAY_ERROR;
+import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String DAY_INPUT_MESSAGE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
@@ -31,22 +33,28 @@ public class InputView {
         }
     }
 
-    public List<String> readMenus() {
+    public Map<String, Integer> readMenus() {
         writer.writeLine(MENU_INPUT_MESSAGE);
         List<String> orderItems = splitOrderItems(reader.get());
 
-        return orderItems;
+        return orderItems.stream()
+                .collect(Collectors.toMap(this::toMenuName, this::toOrderCount));
     }
 
     private List<String> splitOrderItems(String input) {
         return Arrays.asList(input.split(ORDER_ITEM_DELIMITER));
     }
 
-    private Map<String, Integer> splitOrderMenuAndCount(String orderItem) {
-        String[] orderMenuAndCount = orderItem.split(ORDER_MENU_COUNT_DELIMITER);
-        String orderMenu = orderMenuAndCount[0];
-        int orderCount = Integer.parseInt(orderMenuAndCount[1]);
+    private String toMenuName(String orderItem) {
+        return orderItem.split(ORDER_MENU_COUNT_DELIMITER)[0];
+    }
 
-        return Map.of(orderMenu, orderCount);
+    private Integer toOrderCount(String orderItem) {
+        try {
+            String orderCount = orderItem.split(ORDER_MENU_COUNT_DELIMITER)[1];
+            return Integer.parseInt(orderCount);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
     }
 }
