@@ -21,4 +21,8 @@ public class EventResult {
 
         return totalDiscountAmount.add(menuGiveawayPrice);
     }
+
+    public Menu getMenuGiveaway() {
+        return menuGiveaway;
+    }
 }

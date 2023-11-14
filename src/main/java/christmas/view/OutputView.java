@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.EventResult;
 import christmas.domain.Money;
 import christmas.domain.Reservation;
 import christmas.domain.menu.Menu;
@@ -17,11 +18,18 @@ public class OutputView {
     private static final String SECTION_HEADER_FORMAT = "<%s>";
     private static final String ORDER_MENU_HEADER = "주문 메뉴";
     private static final String TOTAL_PRICE_HEADER = "할인 전 총주문 금액";
+    private static final String MENU_GIVEAWAY_HEADER = "증정 메뉴";
 
     private final Writer writer;
 
     public OutputView(Writer writer) {
         this.writer = writer;
+    }
+
+    private <T> void writeResultSection(String header, Consumer<T> writeResult, T result) {
+        writer.writeLine(String.format(SECTION_HEADER_FORMAT, header));
+        writeResult.accept(result);
+        writer.writeLine(EMPTY_LINE);
     }
 
     public void writeStartMessage() {
@@ -39,17 +47,19 @@ public class OutputView {
         writer.writeLine(EMPTY_LINE);
     }
 
-    private <T> void writeResultSection(String header, Consumer<T> writeResult, T result) {
-        writer.writeLine(String.format(SECTION_HEADER_FORMAT, header));
-        writeResult.accept(result);
-        writer.writeLine(EMPTY_LINE);
-    }
-
     private void writeOrderMenus(Map<Menu, Integer> orderMenus) {
         orderMenus.forEach((menu, count) -> writer.writeLine(String.format(MENU_FORMAT, menu.getName(), count)));
     }
 
     private void writeTotalPrice(Money totalPrice) {
         writer.writeLine(String.format(PRICE_FORMAT, totalPrice.getAmount()));
+    }
+
+    public void writeEventResult(EventResult eventResult) {
+        writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResult.getMenuGiveaway());
+    }
+
+    private void writeMenuGiveaway(Menu menuGiveaway) {
+        writer.writeLine(menuGiveaway.getName());
     }
 }

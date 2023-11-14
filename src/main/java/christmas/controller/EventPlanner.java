@@ -33,6 +33,7 @@ public class EventPlanner {
         EventResult eventResult = eventService.getEventResult(reservation);
 
         outputView.writeReservation(reservation);
+        outputView.writeEventResult(eventResult);
     }
 
     public Reservation reserve() {
