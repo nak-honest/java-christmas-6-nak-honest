@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.badge.EventBadge;
 import christmas.dto.EventResultDto;
 
 import java.time.LocalDate;
@@ -19,8 +20,9 @@ public class OutputView {
     private static final String TOTAL_PRICE_HEADER = "할인 전 총주문 금액";
     private static final String MENU_GIVEAWAY_HEADER = "증정 메뉴";
     private static final String BENEFIT_RESULT_HEADER = "혜택 내역";
-    private static final String BENEFIT_TOTAL_AMOUNT_HEADER = "총 혜택 금액";
+    private static final String BENEFIT_TOTAL_AMOUNT_HEADER = "총혜택 금액";
     private static final String PAYMENT_AMOUNT_HEADER = "할인 후 예상 결제 금액";
+    private static final String EVENT_BADGE_HEADER = "12월 이벤트 배지";
 
     private final Writer writer;
 
@@ -41,6 +43,7 @@ public class OutputView {
         writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
                 eventResultDto.totalBenefitAmount());
         writeResultSection(PAYMENT_AMOUNT_HEADER, this::writePrice, eventResultDto.paymentAmount());
+        writeResultSection(EVENT_BADGE_HEADER, this::writeEventBadge, eventResultDto.eventBadge());
     }
 
     private void writeEventResultHeader(LocalDate visitDate) {
@@ -83,5 +86,14 @@ public class OutputView {
 
     private void writeTotalBenefitAmount(int totalBenefitAmount) {
         writer.writeLine(String.format(PRICE_FORMAT, -totalBenefitAmount));
+    }
+
+    private void writeEventBadge(EventBadge eventBadge) {
+        if (eventBadge.equals(EventBadge.NONE)) {
+            writer.writeLine(NO_RESULT_MESSAGE);
+            return;
+        }
+
+        writer.writeLine(eventBadge.getName());
     }
 }
