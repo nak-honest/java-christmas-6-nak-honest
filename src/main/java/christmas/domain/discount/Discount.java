@@ -2,7 +2,7 @@ package christmas.domain.discount;
 
 import christmas.domain.EventName;
 import christmas.domain.Money;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.rule.EventRule;
 import christmas.domain.discount.strategy.DiscountStrategy;
 

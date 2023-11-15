@@ -1,7 +1,7 @@
 package christmas.domain.rule;
 
 import christmas.domain.Money;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 
 public class TotalPriceEventRule implements EventRule {
     private final Money minPrice;

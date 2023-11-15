@@ -1,8 +1,8 @@
 package christmas.service;
 
 import christmas.domain.EventMonthDates;
-import christmas.domain.OrderMenus;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.OrderMenus;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.menu.Menu;
 import java.time.LocalDate;
 import java.util.List;

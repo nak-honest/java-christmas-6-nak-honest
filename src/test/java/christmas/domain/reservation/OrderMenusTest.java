@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.reservation;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -6,6 +6,8 @@ import christmas.domain.menu.Menu;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import christmas.domain.reservation.OrderMenus;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

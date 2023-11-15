@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.EventResult;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.dto.EventResultDto;
 import christmas.service.EventService;
 import christmas.service.ReservationService;

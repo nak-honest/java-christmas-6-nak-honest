@@ -1,7 +1,8 @@
-package christmas.domain;
+package christmas.domain.reservation;
 
 import static christmas.ErrorMessage.INVALID_MENU_ERROR;
 
+import christmas.domain.Money;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 import java.util.ArrayList;
@@ -12,38 +13,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OrderMenus {
-    private static final int MIN_MENU_COUNT = 1;
-    private static final int MAX_TOTAL_MENU_COUNT = 20;
-
     private final Map<Menu, Integer> orderMenus;
 
     public OrderMenus(Map<Menu, Integer> orderMenus) {
         this.orderMenus = new EnumMap<>(orderMenus);
-        validate();
-    }
-
-    private void validate() {
-        validateMenuCount();
-        validateTotalMenuCount();
-        validateOnlyBeverageOrder();
-    }
-
-    private void validateMenuCount() {
-        if (orderMenus.values().stream().anyMatch(count -> count < MIN_MENU_COUNT)) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
-        }
-    }
-
-    private void validateTotalMenuCount() {
-        if (orderMenus.values().stream().mapToInt(Integer::intValue).sum() > MAX_TOTAL_MENU_COUNT) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
-        }
-    }
-
-    private void validateOnlyBeverageOrder() {
-        if (orderMenus.keySet().stream().allMatch(menu -> menu.isTypeOf(MenuType.BEVERAGE))) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
-        }
+        OrderMenusValidator.validate(orderMenus);
     }
 
     public static OrderMenus createFromDistinctMenus(List<Map.Entry<Menu, Integer>> menus) {
@@ -55,9 +29,16 @@ public class OrderMenus {
     }
 
     private static void validateDuplicateMenu(List<Map.Entry<Menu, Integer>> orderMenus) {
-        if (orderMenus.stream().map(Map.Entry::getKey).distinct().count() != orderMenus.size()) {
+        if (countDistinctMenu(orderMenus) != orderMenus.size()) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
+    }
+
+    private static int countDistinctMenu(List<Map.Entry<Menu, Integer>> orderMenus) {
+        return (int) orderMenus.stream()
+                .map(Map.Entry::getKey)
+                .distinct()
+                .count();
     }
 
     public int countMenuByType(MenuType menuType) {
@@ -73,15 +54,8 @@ public class OrderMenus {
 
     public Money getTotalPrice() {
         return orderMenus.entrySet().stream()
-                .map(this::getPrice)
+                .map(entry -> entry.getKey().getPrice().multiply(entry.getValue()))
                 .reduce(Money.zeroInstance(), Money::add);
-    }
-
-    private Money getPrice(Map.Entry<Menu, Integer> entry) {
-        Menu menu = entry.getKey();
-        int count = entry.getValue();
-
-        return menu.getPrice().multiply(count);
     }
 
     public Map<Menu, Integer> getOrderMenus() {

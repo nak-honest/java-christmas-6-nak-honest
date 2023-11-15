@@ -3,8 +3,8 @@ package christmas.domain.discount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Money;
-import christmas.domain.OrderMenus;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.OrderMenus;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.discount.factory.DaysOfWeekDiscountFactory;
 import christmas.domain.menu.Menu;
 import java.time.LocalDate;

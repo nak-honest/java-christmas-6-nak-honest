@@ -1,6 +1,6 @@
 package christmas.domain.rule;
 
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;

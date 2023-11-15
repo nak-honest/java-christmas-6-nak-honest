@@ -2,7 +2,7 @@ package christmas.service;
 
 import christmas.domain.EventResult;
 import christmas.domain.Money;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.badge.EventBadge;
 import christmas.domain.discount.DiscountResult;
 import christmas.domain.discount.Discounts;

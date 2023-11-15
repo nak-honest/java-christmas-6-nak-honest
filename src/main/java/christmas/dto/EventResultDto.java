@@ -1,7 +1,7 @@
 package christmas.dto;
 
 import christmas.domain.EventResult;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.badge.EventBadge;
 import java.time.LocalDate;
 import java.util.Map;

@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.domain.reservation;
 
+import christmas.domain.Money;
 import christmas.domain.menu.MenuType;
 import java.time.DayOfWeek;
 import java.time.LocalDate;

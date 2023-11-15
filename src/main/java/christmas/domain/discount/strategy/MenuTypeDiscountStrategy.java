@@ -1,7 +1,7 @@
 package christmas.domain.discount.strategy;
 
 import christmas.domain.Money;
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.menu.MenuType;
 
 public class MenuTypeDiscountStrategy implements DiscountStrategy {

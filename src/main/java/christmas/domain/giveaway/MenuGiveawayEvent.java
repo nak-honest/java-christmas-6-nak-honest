@@ -1,6 +1,6 @@
 package christmas.domain.giveaway;
 
-import christmas.domain.Reservation;
+import christmas.domain.reservation.Reservation;
 import christmas.domain.rule.EventRule;
 import christmas.domain.menu.Menu;
 
