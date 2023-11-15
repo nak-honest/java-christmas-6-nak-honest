@@ -50,16 +50,26 @@ public class InputView {
     }
 
     private List<String> splitOrderItems(String orderItems) {
+        validateDelimiter(orderItems, ORDER_ITEM_DELIMITER);
+
         return Arrays.asList(orderItems.split(ORDER_ITEM_DELIMITER));
     }
 
     private List<String> splitOrderItem(String orderItem) {
+        validateDelimiter(orderItem, ORDER_MENU_COUNT_DELIMITER);
         List<String> orderMenuAndCount = Arrays.asList(orderItem.split(ORDER_MENU_COUNT_DELIMITER));
+
         if (orderMenuAndCount.size() != MENU_ITEM_INDEX_COUNT) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
         }
 
         return orderMenuAndCount;
+    }
+
+    private void validateDelimiter(String input, String delimiter) {
+        if (input.startsWith(delimiter) || input.endsWith(delimiter)) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR.format());
+        }
     }
 
     private Integer toOrderCount(String menuCount) {
