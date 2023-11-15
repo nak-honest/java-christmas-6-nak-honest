@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.ErrorMessage.NEGATIVE_MONEY_ERROR;
+
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
@@ -14,7 +16,7 @@ public class Money implements Comparable<Money> {
 
     private void validate(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 음수일 수 없습니다.");
+            throw new IllegalArgumentException(NEGATIVE_MONEY_ERROR.format());
         }
     }
 
