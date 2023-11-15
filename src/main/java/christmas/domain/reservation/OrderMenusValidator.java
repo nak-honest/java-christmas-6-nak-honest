@@ -11,6 +11,8 @@ public class OrderMenusValidator {
     private static final int MIN_MENU_COUNT = 1;
     private static final int MAX_TOTAL_MENU_COUNT = 20;
 
+    private OrderMenusValidator() {}
+
     public static void validate(Map<Menu, Integer> orderMenus) {
         validateMenuCount(orderMenus);
         validateTotalMenuCount(orderMenus);

@@ -15,6 +15,8 @@ public class ChristmasPromotionDiscountsFactory {
     private static final Money COMMON_MINIMUM_PRICE = Money.of(10_000);
     private static final EventRule COMMON_DISCOUNT_RULE = new TotalPriceEventRule(COMMON_MINIMUM_PRICE);
 
+    private ChristmasPromotionDiscountsFactory() {}
+
     public static Discounts create() {
         return new Discounts(
                 List.of(christmasDDayDiscount, weekdayDiscount, weekendDiscount, specialDiscount),
