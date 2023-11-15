@@ -19,7 +19,7 @@ public class OutputView {
     private static final String TOTAL_PRICE_HEADER = "할인 전 총주문 금액";
     private static final String MENU_GIVEAWAY_HEADER = "증정 메뉴";
     private static final String BENEFIT_RESULT_HEADER = "혜택 내역";
-    private static final String BENEFIT_TOTAL_AMOUNT_HEADER = "총혜택 금액";
+    private static final String BENEFIT_AMOUNT_HEADER = "총혜택 금액";
     private static final String PAYMENT_AMOUNT_HEADER = "할인 후 예상 결제 금액";
     private static final String EVENT_BADGE_HEADER = "12월 이벤트 배지";
 
@@ -39,8 +39,7 @@ public class OutputView {
         writeResultSection(TOTAL_PRICE_HEADER, this::writePrice, eventResultDto.totalOrderPrice());
         writeResultSection(MENU_GIVEAWAY_HEADER, this::writeMenuGiveaway, eventResultDto.menuGiveaway());
         writeResultSection(BENEFIT_RESULT_HEADER, this::writeBenefitResult, eventResultDto.benefitResult());
-        writeResultSection(BENEFIT_TOTAL_AMOUNT_HEADER, this::writeTotalBenefitAmount,
-                eventResultDto.totalBenefitAmount());
+        writeResultSection(BENEFIT_AMOUNT_HEADER, this::writeBenefitAmount, eventResultDto.totalBenefitAmount());
         writeResultSection(PAYMENT_AMOUNT_HEADER, this::writePrice, eventResultDto.paymentAmount());
         writeResultSection(EVENT_BADGE_HEADER, this::writeEventBadge, eventResultDto.eventBadge());
     }
@@ -83,7 +82,7 @@ public class OutputView {
                 writer.writeLine(String.format(BENEFIT_RESULT_FORMAT, eventName, -amount)));
     }
 
-    private void writeTotalBenefitAmount(int totalBenefitAmount) {
+    private void writeBenefitAmount(int totalBenefitAmount) {
         writer.writeLine(String.format(PRICE_FORMAT, -totalBenefitAmount));
     }
 

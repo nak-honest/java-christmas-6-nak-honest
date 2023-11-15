@@ -25,8 +25,7 @@ public class Reservation {
     }
 
     public boolean isDayOfWeekIn(Collection<DayOfWeek> daysOfWeek) {
-        return daysOfWeek.stream()
-                .anyMatch(this::isDayOfWeek);
+        return daysOfWeek.stream().anyMatch(this::isDayOfWeek);
     }
 
     private boolean isDayOfWeek(DayOfWeek dayOfWeek) {
